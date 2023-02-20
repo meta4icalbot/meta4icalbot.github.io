@@ -14,11 +14,11 @@ jobs:
       with: 
         submodules: 'true'
     - name: fix ownership
-      run: git config --local --add safe.directory '*'
+      run: |
+          chown -R $(id -u):$(id -g) $PWD
+          git config --global --add safe.directory '*'
     - name: execute pelican-to-gh action
       uses: rehanhaider/pelican-to-github-pages@v1.2.0
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         GH_PAGES_CNAME: ${{secrets.DOMAIN_CNAME}}
-    #- name: Set ownership
-    #  run: chown -R $(id -u):$(id -g) $PWD
