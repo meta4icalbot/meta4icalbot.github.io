@@ -13,12 +13,8 @@ jobs:
       uses: actions/checkout@v3
       with: 
         submodules: 'true'
-    - name: fix ownership
-      run: |
-          chown -R $(id -u):$(id -g) $PWD
-          git config --global --add safe.directory '*'
     - name: execute pelican-to-gh action
-      uses: rehanhaider/pelican-to-github-pages@v1.2.0
+      uses: meta4icalbot/pelican-to-github-pages@main
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         GH_PAGES_CNAME: ${{secrets.DOMAIN_CNAME}}
